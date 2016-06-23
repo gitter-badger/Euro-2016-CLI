@@ -1,5 +1,7 @@
 # Euro-2016-CLI
 
+[![Join the chat at https://gitter.im/stvhwrd/Euro-2016-CLI](https://badges.gitter.im/stvhwrd/Euro-2016-CLI.svg)](https://gitter.im/stvhwrd/Euro-2016-CLI?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Requirements:
 
 **You must replace `REDDIT_USERNAME` and `REDDIT_PASSWORD` in line #15 of streams.py with your own Reddit username and password.** 
