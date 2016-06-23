@@ -18,15 +18,15 @@ def euro_2016():
         Stats.choose_menu()
         euro_2016()
 
-    if (choose_menu == "h"):
+    elif (choose_menu == "h"):
         Streams.footballHighlights()
         euro_2016()
 
-    if (choose_menu == "l"):
+    elif (choose_menu == "l"):
         Streams.sportLinks()
         euro_2016()
 
-    if (choose_menu == "e"):
+    elif (choose_menu == "e"):
         Stats.Logout()
 
     # user must have entered invalid option
