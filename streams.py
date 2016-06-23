@@ -1,48 +1,50 @@
-#!/usr/bin/python
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import praw
 import re
 from termcolor import colored, cprint
 import sys
-import webbrowser
 
 
-# variables
-user_agent = ("Link Getter")
-r = praw.Reddit(user_agent=user_agent)
+r = praw.Reddit(user_agent="Link Getter")
 
 
 def login():
-    r.login('REDDIT_USERNAME', 'REDDIT_PASSWORD', disable_warning=True)
-    #Enter REDDIT USERNAME AND REDDIT PASSWORD
+    r.login('stvhwrd', 'baby1o99', disable_warning=True)
+    # Enter REDDIT USERNAME AND REDDIT PASSWORD
     # NEEDED TO SEARCH FOR ALL THE LINKS
 
-    print_login = colored("Logging in...\n", 'yellow')
-    print(print_login)
+    print(colored("Logging in...\n", 'yellow'))
 
-def footballHighlights():
+
+def football_highlights():
     subreddit = r.get_subreddit("footballhighlights")
 
     for submission in subreddit.get_hot(limit=15):
         print("Highlight:", submission.title)
 
-    print_input1 = colored("Which game highlights do you want?\n")
-    highlight = input(print_input1)
-    cprint ("~~~~~~HOLD COMMAND + DOUBLE CLICK = Open link in browser ~~~~~~",'red')
+    highlight = input(colored("Which game highlights do you want?\n"))
+
+    cprint("** HOLD COMMAND + CLICK to open link in browser **", 'red')
 
     for submission in subreddit.get_hot(limit=80):
         if re.search(highlight, submission.title, re.IGNORECASE):
             print("\nTitle: ", submission.title)
             print (submission.selftext)
-            
-            #Use this code below if you want to see the first comments (generates more links)
-            #comments = submission.comments
-            #for comment in comments[0:1]:  # first comment is a bot moderator
-                #print(comment.body)  # prints top comments starting from 2nd top comment
-                #print("\n")
 
-    restartProgram()
+            # Use this code below if you want to see the first comments
+            # (generates more links)
+            #
+            # comments = submission.comments
+            # for comment in comments[0:1]:  # first comment is a bot moderator
+            #    print(comment.body)  # prints top comments starting from 2nd
+            #    print("\n")
 
-def sportLinks():
+    restart_program()
+
+
+def sport_links():
     subreddit = r.get_subreddit("soccerstreams")
 
     test = colored("Live games that you can stream...\n", 'yellow')
@@ -54,40 +56,36 @@ def sportLinks():
     print_input5 = colored("\n\nName of the game you want to watch: \n", 'red', attrs=['bold'])
 
     user_input = input(print_input5)
-    cprint ("~~~~~~HOLD COMMAND + DOUBLE CLICK = Open link in browser ~~~~~~",'red')
+    cprint ("~~~~~~HOLD COMMAND + DOUBLE CLICK = Open link in browser ~~~~~~", 'red')
 
     for submission in subreddit.get_hot(limit=12):
         if re.search(user_input, submission.title, re.IGNORECASE):
             print("\nTitle: ", submission.title)
             print("Link: ", submission.url)
-            print("Pick your link!")
+            print("Choose your link!")
 
             comments = submission.comments
             for comment in comments[1:3]:  # first comment is a bot moderator
                 print(comment.body)  # prints top comments starting from 2nd top comment
                 print("\n")
 
-    restartProgram()
+    restart_program()
 
-def restartProgram():
-    print_restart = colored("Do you need any other links?\nHighlights 'h', Soccer Streams 's', Logout 'L', Main Menu 'MM'\n", 'red',
-                            attrs=['bold'])         # restart search if needed
-    restart = input(print_restart)
 
-    while (restart != "h" and restart != "H" and restart != "s" and restart != "S" and restart != "l" and restart != "L" and restart != "mm"
-           and restart != "MM"):  # testing for wrong user input
-        print_restart = colored("Highlights 'h', Soccer Streams 's', Logout 'L', Main Menu 'MM'\n", 'red',
-            attrs=['bold'])  # restart search if needed
-        restart = input(print_restart)
-        restartProgram()
+def restart_program():
+    # restart search if needed
+    print_restart = colored("Do you need any other links?\n"
+                            "Highlights 'h', Soccer Streams 's', Logout 'L', "
+                            "Main Menu 'MM'\n", 'red', attrs=['bold'])
 
-    if (restart == "h" or restart == "H"):
-        footballHighlights()
-    if (restart == "s" or restart == "S"):
-        sportLinks()
-    if (restart == "l" or restart == "L"):
+    restart = input(print_restart).lower()
+
+    if (restart == "h"):
+        football_highlights()
+    elif (restart == "s"):
+        sport_links()
+    elif (restart == "l"):
         print("Bye")
         sys.exit()
-
-
-
+    else:
+        restart_program()
