@@ -19,15 +19,13 @@ Get live soccer/football streams, highlights and live stats for EURO 2016 direct
 You may already have pip.  Enter the command `pip --version` to find out (if you get a version number, then you have it).
 If you don't have pip, then install it:
 
-```bash
-sudo easy_install pip
-```
+`sudo easy_install pip`
+
 
 ### Python modules
 
-```bash
-pip install praw termcolor lxml
-```
+`pip install praw termcolor lxml`
+
 
 ### Installing and Using the Utility:
 
